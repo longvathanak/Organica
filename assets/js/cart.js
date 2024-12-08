@@ -1,15 +1,15 @@
 // Sample data for products
 const products = [
-    { id: 1, name: "Fresh Orangey", price: 85.00},
-    { id: 2, name: "Key Lime", price: 85.00 },
-    { id: 3, name: "Fresh Watermelon", price: 85.00 },
-    { id: 4, name: "Pomagranate Fruit", price: 85.00 },
-    { id: 5, name: "Red onion", price: 85.00 },
-    { id: 6, name: "Lens Results Broccoli", price: 85.00 },
-    { id: 7, name: "Lens Results Spinach", price: 85.00 },
-    { id: 8, name: "Visual matches", price: 85.00 },
-    { id: 9, name: "Lorigun Artificial", price: 85.00 },
-    { id: 10, name: "Leaf lettuce", price: 85.00 },
+    { id: 1, name: "Fresh Orangey", price: 75.00},
+    { id: 2, name: "Key Lime", price: 75.00 },
+    { id: 3, name: "Fresh Watermelon", price: 75.00 },
+    { id: 4, name: "Pomagranate Fruit", price: 75.00 },
+    { id: 5, name: "Red onion", price: 75.00 },
+    { id: 6, name: "Lens Results Broccoli", price: 75.00 },
+    { id: 7, name: "Lens Results Spinach", price: 75.00 },
+    { id: 8, name: "Strawberry", price: 75.00 },
+    { id: 9, name: "Lorigun Artificial", price: 75.00 },
+    { id: 10, name: "Leaf lettuce", price: 75.00 },
     // Add more products as needed
 ];
 
@@ -112,3 +112,83 @@ function calculateTotalPrice() {
     }
     return totalPrice;
 }
+
+// ====================================================================================================================================
+
+const favoriteList = document.getElementById('favorite-list');
+const favoriteBadge = document.querySelector('.btn-badge-fav');
+
+let favoritedProducts = [];
+
+// Generate favorited product cards dynamically
+function updateFavoriteList() {
+  favoriteList.innerHTML = '';
+  favoritedProducts.forEach(product => {
+    const listItem = createFavoriteItem(product);
+    favoriteList.appendChild(listItem);
+  });
+  updateFavoriteBadge();
+}
+
+function createFavoriteItem(product) {
+  const listItem = document.createElement('li');
+  listItem.classList.add('panel-item');
+  listItem.innerHTML = `
+    <div class="panel-card">
+      <figure class="item-banner">
+        <img src="./assets/images/product-small-1.jpg" width="46" height="46" loading="lazy" alt="${product.name}">
+      </figure>
+      <div>
+        <p class="item-title">${product.name}</p>
+        <span class="item-value">$${product.price.toFixed(2)}</span>
+      </div>
+      <button class="item-close-btn" aria-label="Remove item">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+  `;
+
+  const removeBtn = listItem.querySelector('.item-close-btn');
+  removeBtn.addEventListener('click', () => {
+    const itemIndex = favoritedProducts.findIndex(p => p.id === product.id);
+    if (itemIndex !== -1) {
+      favoritedProducts.splice(itemIndex, 1);
+      updateFavoriteList();
+    }
+  });
+
+  return listItem;
+}
+
+function updateFavoriteBadge() {
+  favoriteBadge.textContent = favoritedProducts.length.toString().padStart(2, '0');
+  favoriteBadge.setAttribute('value', favoritedProducts.length);
+}
+
+function addToFavorites(product) {
+  const itemIndex = favoritedProducts.findIndex(p => p.id === product.id);
+  if (itemIndex === -1) {
+    favoritedProducts.push(product);
+    updateFavoriteList();
+  }
+}
+
+// Add event listener to "Add to Favorite" buttons
+document.querySelectorAll('.product-btn[aria-label="Add to Favorite"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const productId = parseInt(btn.closest('.product-card').querySelector('a').dataset.id);
+    const product = products.find(p => p.id === productId);
+    if (product) {
+      addToFavorites(product);
+    }
+  });
+});
+
+// Initialize the favorite list and badge count
+function initFavorites() {
+  // Retrieve the favorite products from local storage or other source
+  favoritedProducts = JSON.parse(localStorage.getItem('favoritedProducts')) || [];
+  updateFavoriteList();
+}
+
+initFavorites();

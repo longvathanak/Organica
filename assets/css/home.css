@@ -883,3 +883,34 @@
   .partner-item { min-width: 16.66%; }
 
 }
+
+/* Autocomplete dropdown */
+.autocomplete-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  background: #fff;
+  position: absolute; /* Position relative to input-wrapper */
+  top: 100%; /* Place dropdown right below the input field */
+  left: 0; /* Align to the left edge of the input field */
+  width: 100%; /* Match the width of the input field */
+  max-height: 250px; /* Add max-height with scrolling */
+  overflow-y: auto;
+  z-index: 1000; /* Ensure it appears above other elements */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  font-size: 16px;
+}
+
+/* Autocomplete list items */
+.autocomplete-results li {
+  padding: 12px 15px; /* Add space around text */
+  cursor: pointer;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+}
+
+.autocomplete-results li:hover {
+  background-color: #f0f0f0;
+}
