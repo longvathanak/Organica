@@ -91,3 +91,64 @@ for (let i = 0; i < productThumbnails.length; i++) {
 
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const resultsBox = document.getElementById("autocompleteResults");
+
+  // List of products
+  const products = [
+    "Fresh Orangey",
+    "Key Lime",
+    "Fresh Watermelon",
+    "Fresh Strawberry",
+    "Pomegranate Fruit",
+    "Red Onion",
+    "Len Results Brocoli",
+    "Len Results Spinach",
+    "Lorigun Artifical",
+    "Leaf Lectuce"
+  ];
+
+  // Function to filter products based on user input
+  const filterProducts = (query) => {
+    if (!query) return []; // If the query is empty, return an empty array
+    return products.filter(product => 
+      product.toLowerCase().includes(query.toLowerCase())
+    );
+  };
+
+  // Function to display filtered suggestions
+  const displaySuggestions = (suggestions) => {
+    resultsBox.innerHTML = ""; // Clear previous results
+
+    if (suggestions.length === 0) {
+      resultsBox.innerHTML = "<li>No matches found</li>";
+      return;
+    }
+
+    suggestions.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      li.addEventListener("click", () => {
+        searchInput.value = item; // Set input to the selected suggestion
+        resultsBox.innerHTML = ""; // Clear suggestions
+      });
+      resultsBox.appendChild(li);
+    });
+  };
+
+  // Event listener for input changes
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.trim();
+    const filteredResults = filterProducts(query);
+    displaySuggestions(filteredResults);
+  });
+
+  // Hide suggestions when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".input-wrapper")) {
+      resultsBox.innerHTML = "";
+    }
+  });
+});
