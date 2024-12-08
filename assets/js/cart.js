@@ -1,15 +1,15 @@
 // Sample data for products
 const products = [
-    { id: 1, name: "Fresh Orangey", price: 85.00},
-    { id: 2, name: "Key Lime", price: 85.00 },
-    { id: 3, name: "Fresh Watermelon", price: 85.00 },
-    { id: 4, name: "Pomagranate Fruit", price: 85.00 },
-    { id: 5, name: "Red onion", price: 85.00 },
-    { id: 6, name: "Lens Results Broccoli", price: 85.00 },
-    { id: 7, name: "Lens Results Spinach", price: 85.00 },
-    { id: 8, name: "Visual matches", price: 85.00 },
-    { id: 9, name: "Lorigun Artificial", price: 85.00 },
-    { id: 10, name: "Leaf lettuce", price: 85.00 },
+    { id: 1, name: "Fresh Orangey", price: 75.00},
+    { id: 2, name: "Key Lime", price: 75.00 },
+    { id: 3, name: "Fresh Watermelon", price: 75.00 },
+    { id: 4, name: "Pomagranate Fruit", price: 75.00 },
+    { id: 5, name: "Red onion", price: 75.00 },
+    { id: 6, name: "Lens Results Broccoli", price: 75.00 },
+    { id: 7, name: "Lens Results Spinach", price: 75.00 },
+    { id: 8, name: "Strawberry", price: 75.00 },
+    { id: 9, name: "Lorigun Artificial", price: 75.00 },
+    { id: 10, name: "Leaf lettuce", price: 75.00 },
     // Add more products as needed
 ];
 
